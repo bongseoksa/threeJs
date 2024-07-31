@@ -29,19 +29,26 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 
-// Time
-let time = Date.now();
+/* // Time
+let time = Date.now(); */
+
+// Clock
+const clock = new THREE.Clock();
 
 /** Animation */
 const tick = () => {
-  // Time
+  /* // Time
   const currentTime = Date.now();
-  const deltaTime = currentTime - time;
-  time = currentTime;
-  // console.log('renderTimestamp', `${deltaTime / 1000}s`);
+  const deltaTime = currentTime - time; // 랜더링 프레임당 경과시간(밀리초)
+  time = currentTime; */
+
+  // Clock
+  const elapsedTime = clock.getElapsedTime(); // Clock 초기화 후 지난 시간(초)
 
   // Update Objects
-  mesh.rotation.y += 0.001 * deltaTime; // 디스플레이 주사율이 다른 pc 에서 동일한 애니메이션 속도 설정을 위함
+  camera.position.y = Math.sin((elapsedTime * Math.PI) / 2);
+  camera.position.x = Math.cos((elapsedTime * Math.PI) / 2);
+  camera.lookAt(mesh.position); // 카메라 transform이 변경되더라도 mesh오브젝트 바라보기
 
   // Render
   renderer.render(scene, camera);
