@@ -1,5 +1,8 @@
 import * as THREE from 'three';
 
+/** Cursor */
+const cursor = { x: 0, y: 0 };
+
 /** Canvas */
 const canvas = document.querySelector('canvas.webgl');
 
@@ -20,25 +23,25 @@ const sizes = {
 
 /** Camera */
 // perspected camera
-// const camera = new THREE.PerspectiveCamera(
-//   75,
-//   sizes.width / sizes.height,
-//   1,
-//   1000,
-// );
-// orthographic camera
-const aspectRatio = sizes.width / sizes.height; // 오브젝트의 랜더링 사이즈 비율 조정을 위함
-const camera = new THREE.OrthographicCamera(
-  -1 * aspectRatio,
-  1 * aspectRatio,
+const camera = new THREE.PerspectiveCamera(
+  75,
+  sizes.width / sizes.height,
   1,
-  -1,
-  1,
-  100,
+  1000,
 );
-camera.position.x = 2;
-camera.position.y = 2;
-camera.position.z = 2;
+// orthographic camera
+// const aspectRatio = sizes.width / sizes.height; // 오브젝트의 랜더링 사이즈 비율 조정을 위함
+// const camera = new THREE.OrthographicCamera(
+//   -1 * aspectRatio,
+//   1 * aspectRatio,
+//   1,
+//   -1,
+//   1,
+//   100,
+// );
+// camera.position.x = 2;
+// camera.position.y = 2;
+camera.position.z = 3;
 console.log(camera.position.length());
 camera.lookAt(mesh.position);
 scene.add(camera);
@@ -57,10 +60,22 @@ const tick = () => {
   // Clock
   const elapsedTime = clock.getElapsedTime();
 
-  mesh.rotation.y = elapsedTime * Math.PI * 0.5;
+  // Update objects
+  // mesh.rotation.y = elapsedTime * Math.PI * 0.5;
+
+  // Update camera
+  camera.position.x = cursor.x * 10;
+  camera.position.y = cursor.y * 10;
+  camera.lookAt(new THREE.Vector3(0, 0, 0));
 
   // Render
   renderer.render(scene, camera);
   window.requestAnimationFrame(tick);
 };
 tick();
+
+window.addEventListener('mousemove', (event) => {
+  cursor.x = -(event.clientX / sizes.width - 0.5);
+  cursor.y = event.clientY / sizes.height - 0.5;
+  console.log(cursor.x, cursor.y);
+});
