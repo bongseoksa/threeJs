@@ -19,11 +19,22 @@ const sizes = {
 };
 
 /** Camera */
-const camera = new THREE.PerspectiveCamera(
-  75,
-  sizes.width / sizes.height,
+// perspected camera
+// const camera = new THREE.PerspectiveCamera(
+//   75,
+//   sizes.width / sizes.height,
+//   1,
+//   1000,
+// );
+// orthographic camera
+const aspectRatio = sizes.width / sizes.height; // 오브젝트의 랜더링 사이즈 비율 조정을 위함
+const camera = new THREE.OrthographicCamera(
+  -1 * aspectRatio,
+  1 * aspectRatio,
   1,
-  1000,
+  -1,
+  1,
+  100,
 );
 camera.position.x = 2;
 camera.position.y = 2;
