@@ -1,3 +1,4 @@
+import gsap from 'gsap';
 import * as THREE from 'three';
 
 /** Canvas */
@@ -32,8 +33,11 @@ renderer.setSize(sizes.width, sizes.height);
 /* // Time
 let time = Date.now(); */
 
-// Clock
-const clock = new THREE.Clock();
+/* // Clock
+const clock = new THREE.Clock(); */
+
+gsap.to(mesh.position, { duration: 1, delay: 1, x: 2, ease: 'power1' });
+gsap.to(mesh.position, { duration: 1, delay: 2, x: 0, ease: 'power1' });
 
 /** Animation */
 const tick = () => {
@@ -42,13 +46,13 @@ const tick = () => {
   const deltaTime = currentTime - time; // 랜더링 프레임당 경과시간(밀리초)
   time = currentTime; */
 
-  // Clock
+  /* // Clock
   const elapsedTime = clock.getElapsedTime(); // Clock 초기화 후 지난 시간(초)
 
   // Update Objects
   camera.position.y = Math.sin((elapsedTime * Math.PI) / 2);
   camera.position.x = Math.cos((elapsedTime * Math.PI) / 2);
-  camera.lookAt(mesh.position); // 카메라 transform이 변경되더라도 mesh오브젝트 바라보기
+  camera.lookAt(mesh.position); // 카메라 transform이 변경되더라도 mesh오브젝트 바라보기 */
 
   // Render
   renderer.render(scene, camera);
