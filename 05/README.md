@@ -21,3 +21,7 @@
   - getElapseTime()
     Clock이 호출된 이후의 경과 시간(초)
     ex) 매 프레임마다 호출하는 경우 값이 계속 증가
+
+### GSAP (GreenSock Animation Platform)
+
+- 오브젝트 애니메이션 라이브러리
