@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/Addons.js';
 
 /** Cursor */
 const cursor = { x: 0, y: 0 };
@@ -46,6 +47,9 @@ console.log(camera.position.length());
 camera.lookAt(mesh.position);
 scene.add(camera);
 
+/** Controls */
+const controls = new OrbitControls(camera, canvas);
+
 /** Renderer */
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
@@ -63,11 +67,14 @@ const tick = () => {
   // Update objects
   // mesh.rotation.y = elapsedTime * Math.PI * 0.5;
 
-  // Update camera
+  /* // Update camera
   camera.position.x = Math.sin(cursor.x * Math.PI * 2) * Math.PI;
   camera.position.z = Math.cos(cursor.x * Math.PI * 2) * Math.PI;
   camera.position.y = cursor.y * 10;
-  camera.lookAt(new THREE.Vector3(0, 0, 0));
+  camera.lookAt(new THREE.Vector3(0, 0, 0)); */
+
+  // Update controls
+  controls.update();
 
   // Render
   renderer.render(scene, camera);
